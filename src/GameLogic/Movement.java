@@ -1,11 +1,13 @@
 package GameLogic;
 
 import java.awt.Point;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Animals.Dog;
 import Gui.Frame;
 
 public class Movement {
@@ -46,24 +48,46 @@ public class Movement {
 		}
 	}
 	
-	public static void updateDogPosition(JLabel cat, JLabel dog) {
-		Point oldLocation = dog.getLocation();
-		Point newLocation = oldLocation;
-		if (Math.abs(cat.getY() - dog.getY()) <= 100 && Math.abs(cat.getX() - dog.getX()) <= 100) {
-			if (cat.getY() != dog.getY()) {
-				if (cat.getY() < dog.getY()) {
-					newLocation.y -= VELOCITY;
-				} else { newLocation.y += VELOCITY; }
-			} else if (cat.getX() != dog.getX()) {
-				if (cat.getX() < dog.getX()) {
-					newLocation.x -= VELOCITY;
-				} else { newLocation.x += VELOCITY; }
+	public static void updateDogPosition(JLabel cat, List<Dog> dogList) {
+		for (Dog dog : dogList) {
+			JLabel dogLbl = dog.getDogLable();
+			Point oldLocation = dogLbl.getLocation();
+			Point newLocation = oldLocation;
+			if (Math.abs(cat.getY() - dogLbl.getY()) <= 100 && Math.abs(cat.getX() - dogLbl.getX()) <= 100) {
+				if (cat.getY() != dogLbl.getY()) {
+					if (cat.getY() < dogLbl.getY()) {
+						newLocation.y -= VELOCITY;
+					} else { newLocation.y += VELOCITY; }
+				} else if (cat.getX() != dogLbl.getX()) {
+					if (cat.getX() < dogLbl.getX()) {
+						newLocation.x -= VELOCITY;
+					} else { newLocation.x += VELOCITY; }
+				}
+				dogLbl.setLocation(newLocation);
+			} else {
+				updatePosition(Frame.getArea(), dogLbl, random.nextInt(38, 40));
 			}
-			dog.setLocation(newLocation);
-		} else {
-			updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));
 		}
 	}
+	
+//	public static void updateDogPosition(JLabel cat, JLabel dog) {
+//		Point oldLocation = dog.getLocation();
+//		Point newLocation = oldLocation;
+//		if (Math.abs(cat.getY() - dog.getY()) <= 100 && Math.abs(cat.getX() - dog.getX()) <= 100) {
+//			if (cat.getY() != dog.getY()) {
+//				if (cat.getY() < dog.getY()) {
+//					newLocation.y -= VELOCITY;
+//				} else { newLocation.y += VELOCITY; }
+//			} else if (cat.getX() != dog.getX()) {
+//				if (cat.getX() < dog.getX()) {
+//					newLocation.x -= VELOCITY;
+//				} else { newLocation.x += VELOCITY; }
+//			}
+//			dog.setLocation(newLocation);
+//		} else {
+//			updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));
+//		}
+//	}
 	
 	
 	public static void updateMousePosition(JLabel mouse, JLabel cat) {

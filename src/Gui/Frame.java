@@ -30,7 +30,7 @@ public class Frame extends JFrame implements KeyListener{
 	private ImageIcon imageIcon;
 	private JLabel cat;
 	private JLabel mouse;
-	private Dog dog;
+	//private Dog dog;
 	private List<Dog> dogList = new ArrayList<>();
 	private JLabel grid;
 	private JLabel pictureFrame;
@@ -76,7 +76,7 @@ public class Frame extends JFrame implements KeyListener{
 		
 		this.setLayout(null);
 		this.setTitle("GameProject");
-		this.setBounds(600, 250, 600, 600);
+		this.setBounds(500, 150, 600, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.getContentPane().setBackground(Color.GRAY.darker().darker());
@@ -85,6 +85,13 @@ public class Frame extends JFrame implements KeyListener{
 		this.getContentPane().add(pictureFrame);
 		this.getContentPane().setVisible(true);
 		this.setVisible(true);
+		
+		dogList.add(new Dog());
+		dogList.get(0).dogSpawn(area, cat, mouse, dogList);
+		//area.add(dogList.get(0));
+		
+		//this.dog = new Dog(area);
+		//area.add(dog);
 		
 		pictureFrame.setBounds(30, 20, 520, 520);
 		pictureFrame.setOpaque(false);
@@ -113,8 +120,7 @@ public class Frame extends JFrame implements KeyListener{
 		//dog.setOpaque(false);
 		//dog.setVisible(true);
 		//dog.setLocation(random.nextInt(0, 10) * 50, random.nextInt(0, 10) * 50);
-		this.dog = new Dog(area);
-		area.add(dog);
+		
 		
 		grid.setBounds(0, 0, 500, 500);
 		grid.setOpaque(false);
@@ -141,12 +147,15 @@ public class Frame extends JFrame implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		Movement.updateDogPosition(cat, dog.getDogLable());
+		Movement.updateDogPosition(cat, dogList);
+
+//		Movement.updateDogPosition(cat, dogList.get(0).getDogLable());
 		Movement.updatePosition(area, cat, e.getKeyCode());
 		if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
 		 Movement.updateMousePosition(mouse, cat);
 		}
-		Collision.checkDogCollision(cat, dog.getDogLable());
+		Collision.checkDogCollision(cat, dogList);
+//		Collision.checkDogCollision(cat, dogList.get(0).getDogLable());
 	}
 	
 	public static JPanel getArea() {

@@ -2,10 +2,13 @@ package GameLogic;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Animals.Dog;
 
 public class Collision {
 
@@ -22,11 +25,12 @@ public class Collision {
 		}
 	}
 	
-	public static void checkDogCollision(JLabel cat, JLabel dog) {
-		if (cat.getLocation().equals(dog.getLocation())) {
-			System.out.println("wof");
-		}
-	}
+	public static void checkDogCollision(JLabel cat, List<Dog> dogList) {
+		for (Dog dog : dogList) {
+			if (cat.getLocation().equals(dog.getDogLable().getLocation())) {
+				System.out.println("wof");
+			}
+	}	}
 			
 		
 }
