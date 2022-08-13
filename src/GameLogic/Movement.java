@@ -49,7 +49,6 @@ public class Movement {
 	public static void updateDogPosition(JLabel cat, JLabel dog) {
 		Point oldLocation = dog.getLocation();
 		Point newLocation = oldLocation;
-		boolean toTheCat = random.nextBoolean();
 		if (Math.abs(cat.getY() - dog.getY()) <= 100 && Math.abs(cat.getX() - dog.getX()) <= 100) {
 			if (cat.getY() != dog.getY()) {
 				if (cat.getY() < dog.getY()) {
