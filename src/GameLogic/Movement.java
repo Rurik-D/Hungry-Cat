@@ -21,27 +21,27 @@ public class Movement {
 	}
 	
 	
-	public static void updatePosition(JPanel area, JLabel cat, int code) {
+	public static void updatePosition(JPanel area, JLabel label, int code) {
 		switch(code) {
 		case 87, 38: 
-			if (cat.getY() > 0) {
-				cat.setLocation(cat.getX(), cat.getY() - Movement.getVelocity());		// w
-			} else { Collision.checkBorderCollision(cat, 'w'); }
+			if (label.getY() > 0) {
+				label.setLocation(label.getX(), label.getY() - Movement.getVelocity());			// w
+			} else { Collision.checkBorderCollision(label, 'w'); }
 			break;
 		case 65, 37: 
-			if (cat.getX() > 0) {
-				cat.setLocation(cat.getX() -  Movement.getVelocity(), cat.getY());		// a
-			} else { Collision.checkBorderCollision(cat, 'a'); }
+			if (label.getX() > 0) {
+				label.setLocation(label.getX() -  Movement.getVelocity(), label.getY());		// a
+			} else { Collision.checkBorderCollision(label, 'a'); }
 			break;
 		case 83, 40: 
-			if (cat.getY() < area.getHeight() - cat.getHeight()) {
-				cat.setLocation(cat.getX(), cat.getY() +  Movement.getVelocity());		// s
-			} else { Collision.checkBorderCollision(cat, 's'); }
+			if (label.getY() < area.getHeight() - label.getHeight()) {
+				label.setLocation(label.getX(), label.getY() +  Movement.getVelocity());		// s
+			} else { Collision.checkBorderCollision(label, 's'); }
 			break;
 		case 68, 39: 
-			if (cat.getX() < area.getWidth() - cat.getWidth()) {
-				cat.setLocation(cat.getX() +  Movement.getVelocity(), cat.getY());		// d
-			} else { Collision.checkBorderCollision(cat, 'd'); }
+			if (label.getX() < area.getWidth() - label.getWidth()) {
+				label.setLocation(label.getX() +  Movement.getVelocity(), label.getY());		// d
+			} else { Collision.checkBorderCollision(label, 'd'); }
 			break;
 		default:
 			break;
@@ -50,48 +50,37 @@ public class Movement {
 	
 	public static void updateDogPosition(JLabel cat, List<Dog> dogList) {
 		for (Dog dog : dogList) {
-			JLabel dogLbl = dog.getDogLable();
-			Point oldLocation = dogLbl.getLocation();
+			Point oldLocation = dog.getLocation();
 			Point newLocation = oldLocation;
-			if (Math.abs(cat.getY() - dogLbl.getY()) <= 100 && Math.abs(cat.getX() - dogLbl.getX()) <= 100) {
-				if (cat.getY() != dogLbl.getY()) {
-					if (cat.getY() < dogLbl.getY()) {
+			
+			if (Math.abs(cat.getY() - dog.getY()) <= 100 && Math.abs(cat.getX() - dog.getX()) <= 100) {
+				if (cat.getY() != dog.getY()) {
+					if (cat.getY() < dog.getY()) {
 						newLocation.y -= VELOCITY;
 					} else { newLocation.y += VELOCITY; }
-				} else if (cat.getX() != dogLbl.getX()) {
-					if (cat.getX() < dogLbl.getX()) {
+				} else if (cat.getX() != dog.getX()) {
+					if (cat.getX() < dog.getX()) {
 						newLocation.x -= VELOCITY;
 					} else { newLocation.x += VELOCITY; }
 				}
-				dogLbl.setLocation(newLocation);
+				dog.setLocation(newLocation);
 			} else {
-				updatePosition(Frame.getArea(), dogLbl, random.nextInt(38, 40));
+				updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));
+			}
+			
+			for (Dog otherDog : dogList) {
+				
+				if (dog.getIdentifier() != otherDog.getIdentifier()) {
+					while (dog.getLocation().equals(otherDog.getLocation())) {
+						updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));
+					}
+				}
 			}
 		}
 	}
 	
-//	public static void updateDogPosition(JLabel cat, JLabel dog) {
-//		Point oldLocation = dog.getLocation();
-//		Point newLocation = oldLocation;
-//		if (Math.abs(cat.getY() - dog.getY()) <= 100 && Math.abs(cat.getX() - dog.getX()) <= 100) {
-//			if (cat.getY() != dog.getY()) {
-//				if (cat.getY() < dog.getY()) {
-//					newLocation.y -= VELOCITY;
-//				} else { newLocation.y += VELOCITY; }
-//			} else if (cat.getX() != dog.getX()) {
-//				if (cat.getX() < dog.getX()) {
-//					newLocation.x -= VELOCITY;
-//				} else { newLocation.x += VELOCITY; }
-//			}
-//			dog.setLocation(newLocation);
-//		} else {
-//			updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));
-//		}
-//	}
-	
 	
 	public static void updateMousePosition(JLabel mouse, JLabel cat) {
-		
 		Point oldLocation = mouse.getLocation();
 		Point newLocation = oldLocation;
 		while (oldLocation.equals(newLocation) || newLocation.equals(cat.getLocation())) {

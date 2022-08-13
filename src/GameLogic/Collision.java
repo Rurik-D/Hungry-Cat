@@ -1,17 +1,15 @@
 package GameLogic;
 
-import java.awt.Point;
-import java.awt.event.KeyEvent;
 import java.util.List;
-import java.util.Random;
-
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import Animals.Cat;
 import Animals.Dog;
+import Gui.Frame;
 
 public class Collision {
-
+	private static Statistics stats = new Statistics();
+	
 	public static void checkBorderCollision(JLabel cat, char code) {
 		switch (code) {
 			case 'w': cat.setLocation(cat.getX(), 9 *  Movement.getVelocity());
@@ -25,12 +23,15 @@ public class Collision {
 		}
 	}
 	
-	public static void checkDogCollision(JLabel cat, List<Dog> dogList) {
+	public static void checkDogCollision(Cat cat, List<Dog> dogList) {
 		for (Dog dog : dogList) {
 			if (cat.getLocation().equals(dog.getDogLable().getLocation())) {
-				System.out.println("wof");
+				stats.decreaseLifes();
+				System.out.println("Lifes = " + stats.getLifes());
+				cat.catRandomPosition();
+				break;
 			}
-	}	}
-			
+		}
+	}
 		
 }
