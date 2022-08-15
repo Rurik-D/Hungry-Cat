@@ -69,7 +69,6 @@ public class Movement {
 			}
 			
 			for (Dog otherDog : dogList) {
-				
 				if (dog.getIdentifier() != otherDog.getIdentifier()) {
 					while (dog.getLocation().equals(otherDog.getLocation())) {
 						updatePosition(Frame.getArea(), dog, random.nextInt(38, 40));

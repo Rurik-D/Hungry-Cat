@@ -25,6 +25,7 @@ import GameLogic.*;
 public class Frame extends JFrame implements KeyListener{
 	private Rectangle areaRect = new Rectangle(43, 80, 500, 500);
 	private static Rectangle boxRect = new Rectangle(0, 0, 50, 50);
+	private static JPanel mainPanel = new JPanel();
 	private static JPanel area = new JPanel();
 	private Random random = new Random();
 	private ImageIcon imageIcon;
@@ -32,19 +33,28 @@ public class Frame extends JFrame implements KeyListener{
 	private JLabel mouse;
 	private JLabel grid;
 	private JLabel pictureFrame;
+	private JLabel points;
+	private JLabel lifes;
 	private Statistics stats = new Statistics();
 	private List<Dog> dogList = new ArrayList<>();
+	private static Numbers pointsCounter = new Numbers(mainPanel, "points");
+	private static Numbers lifesCounter = new Numbers(mainPanel, "lifes");
+
 	
 	public Frame() {
 		BufferedImage mouseImg = null;
 		BufferedImage gridImg = null;
 		BufferedImage pictureFrameImg = null;
+		BufferedImage pointsImg = null;
+		BufferedImage lifesImg = null;
 		
 		try {
 			mouseImg = ImageIO.read(new File("Assets/Images/mouse.png"));
 			gridImg = ImageIO.read(new File("Assets/Images/grid.png"));
 			pictureFrameImg = ImageIO.read(new File("Assets/Images/pictureFrame.png"));
-			
+			pointsImg = ImageIO.read(new File("Assets/Images/points.png"));
+			lifesImg = ImageIO.read(new File("Assets/Images/lifes.png"));
+
 			imageIcon = new ImageIcon(mouseImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 			mouse = new JLabel(imageIcon);
 			
@@ -54,21 +64,47 @@ public class Frame extends JFrame implements KeyListener{
 			imageIcon = new ImageIcon(pictureFrameImg.getScaledInstance(520, 520, Image.SCALE_SMOOTH));
 			pictureFrame = new JLabel(imageIcon);
 			
+			imageIcon = new ImageIcon(pointsImg.getScaledInstance(183, 60, Image.SCALE_SMOOTH));
+			points = new JLabel(imageIcon);
+			
+			imageIcon = new ImageIcon(lifesImg.getScaledInstance(153, 60, Image.SCALE_SMOOTH));
+			lifes = new JLabel(imageIcon);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		this.setLayout(null);
 		this.setTitle("GameProject");
 		this.setBounds(400, 150, 600, 650);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.getContentPane().setBackground(Color.GRAY.darker().darker());
 		this.addKeyListener(this);
-		this.getContentPane().add(area);
-		this.getContentPane().add(pictureFrame);
-		this.getContentPane().setVisible(true);
 		this.setVisible(true);
+		this.getContentPane().setBackground(Color.GRAY.darker().darker());
+		this.getContentPane().setVisible(true);
+
+		this.getContentPane().add(mainPanel);
+		mainPanel.setBounds(0, 0, 600, 650);
+		mainPanel.add(area);
+		mainPanel.add(pictureFrame);
+		mainPanel.setOpaque(false);
+		mainPanel.setVisible(true);
+		
+		points.setBounds(27, 10, 183, 60);
+		points.setVisible(true);
+		mainPanel.add(points);
+		
+		
+		pointsCounter.getNumber('0').setVisible(true);
+		
+		
+		lifes.setBounds(325, 10, 153, 60);
+		lifes.setVisible(true);
+		mainPanel.add(lifes);
+		//lifesCounter = new Numbers(mainPanel, "lifes");
+		
+		lifesCounter.getNumber('3').setVisible(true);
 		
 		dogList.add(new Dog());
 		dogList.get(0).dogSpawn(area, cat, mouse, dogList);
@@ -76,7 +112,6 @@ public class Frame extends JFrame implements KeyListener{
 		cat.catSpawn(area);
 		
 		pictureFrame.setBounds(33, 70, 520, 520);
-		pictureFrame.setOpaque(false);
 		pictureFrame.setVisible(true);
 		
 		area.setLayout(null);
@@ -87,13 +122,11 @@ public class Frame extends JFrame implements KeyListener{
 		
 		mouse.setBounds(boxRect);
 		Movement.updateMousePosition(mouse, cat);
-		mouse.setOpaque(false);
 		mouse.setVisible(true);
 		mouse.setLocation(random.nextInt(0, 10) * 50, random.nextInt(0, 10) * 50);
 		area.add(mouse);
 		
 		grid.setBounds(0, 0, 500, 500);
-		grid.setOpaque(false);
 		grid.setVisible(true);
 		area.add(grid);
 		
@@ -115,8 +148,8 @@ public class Frame extends JFrame implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		Movement.updateDogPosition(cat, dogList);
 		Movement.updatePosition(area, cat, e.getKeyCode());
+		Movement.updateDogPosition(cat, dogList);
 		if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
 			stats.increasePoints();
 			if (Math.pow(2, dogList.size()) == stats.getPoints()) {
@@ -138,6 +171,14 @@ public class Frame extends JFrame implements KeyListener{
 
 	public static Rectangle getBoxRect() {
 		return boxRect;
+	}
+	
+	public static Numbers getPointsCounter() {
+		return pointsCounter;
+	}
+	
+	public static Numbers getLifesCounter() {
+		return lifesCounter;
 	}
 
 }

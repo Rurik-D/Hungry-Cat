@@ -17,6 +17,7 @@ import Gui.Frame;
 public class Cat extends JLabel{
 	private JLabel cat;
 	private Random random = new Random();
+	//private List<Dog> dogList = Frame
 	
 	public Cat() {
 		BufferedImage catImg = null;
@@ -32,7 +33,6 @@ public class Cat extends JLabel{
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
-		
 	}
 	
 	public void catSpawn(JPanel area) {
@@ -40,7 +40,11 @@ public class Cat extends JLabel{
 		area.add(cat);
 	}
 	public void catRandomPosition() {
+		boolean occupied = true;
 		cat.setLocation(random.nextInt(0, 10) * 50, random.nextInt(0, 10) * 50);
+//		while (occupied) {
+//			for (Dog dog : dogList) {
+//		}
 	}
 	
 	@Override
