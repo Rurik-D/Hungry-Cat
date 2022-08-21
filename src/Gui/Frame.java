@@ -18,8 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Animals.Cat;
-import Animals.Dog;
+import Animals.*;
 import GameLogic.*;
 
 public class Frame extends JFrame implements KeyListener{
@@ -85,6 +84,7 @@ public class Frame extends JFrame implements KeyListener{
 		this.getContentPane().setVisible(true);
 
 		this.getContentPane().add(mainPanel);
+		mainPanel.setLayout(null);
 		mainPanel.setBounds(0, 0, 600, 650);
 		mainPanel.add(area);
 		mainPanel.add(pictureFrame);
@@ -96,7 +96,7 @@ public class Frame extends JFrame implements KeyListener{
 		mainPanel.add(points);
 		
 		
-		pointsCounter.getNumber('0').setVisible(true);
+		pointsCounter.getNumber("00").setVisible(true);
 		
 		
 		lifes.setBounds(325, 10, 153, 60);
@@ -104,7 +104,7 @@ public class Frame extends JFrame implements KeyListener{
 		mainPanel.add(lifes);
 		//lifesCounter = new Numbers(mainPanel, "lifes");
 		
-		lifesCounter.getNumber('3').setVisible(true);
+		lifesCounter.getNumber("03").setVisible(true);
 		
 		dogList.add(new Dog());
 		dogList.get(0).dogSpawn(area, cat, mouse, dogList);

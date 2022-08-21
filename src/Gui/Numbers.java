@@ -129,18 +129,19 @@ public class Numbers {
 		}
 	}
 	
-	public JLabel getNumber(char number) {
+	public JLabel getNumber(String number) {
+		
 		return switch (number) {
-			case '0' -> n0;
-			case '1' -> n1;
-			case '2' -> n2;
-			case '3' -> n3;
-			case '4' -> n4;
-			case '5' -> n5;
-			case '6' -> n6;
-			case '7' -> n7;
-			case '8' -> n8;
-			case '9' -> n9;
+			case "00" -> n0;
+			case "01" -> n1;
+			case "02" -> n2;
+			case "03" -> n3;
+			case "04" -> n4;
+			case "05" -> n5;
+			case "06" -> n6;
+			case "07" -> n7;
+			case "08" -> n8;
+			case "09" -> n9;
 			default -> null;
 		};
 	}
