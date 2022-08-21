@@ -29,14 +29,22 @@ public class Numbers {
 	private final int H = 40;
 	private final int X;
 	private final int Y = 27;
+	private int digitIndexPos;
+
 	/**
 	 * 
+	 * @param container where to add assets.
 	 * @param counterType refears to the Points counter and the Lifes counter.
+	 * @param position refears to the position in decimal notation. (0 units, 1 tents, 2 hundreds etc)
+	 * 
 	 */
-	public Numbers(Container container, String counterType) {
-		this.X = switch(counterType) {
-			case "points" -> 210;
-			case "lifes" -> 475;
+	public Numbers(Container container, String counterType, int position) {
+		this.digitIndexPos = position + 1;
+		this.X = switch(counterType + position) {
+			case "points0" -> 240;
+			case "points1" -> 210;
+			case "lifes0" -> 505;
+			case "lifes1" -> 475;
 			default -> 0;
 		};
 		
@@ -129,20 +137,154 @@ public class Numbers {
 		}
 	}
 	
-	public JLabel getNumber(String number) {
+	public void getNumber(String number) {
 		
-		return switch (number) {
-			case "00" -> n0;
-			case "01" -> n1;
-			case "02" -> n2;
-			case "03" -> n3;
-			case "04" -> n4;
-			case "05" -> n5;
-			case "06" -> n6;
-			case "07" -> n7;
-			case "08" -> n8;
-			case "09" -> n9;
-			default -> null;
+		switch (number) {
+			case "0" :
+				n0.setVisible(true);
+				break;
+			case "1" :
+				n1.setVisible(true);
+				break;
+			case "2" :
+				n2.setVisible(true);
+				break;
+			case "3" : 
+				n3.setVisible(true);
+				break;
+			case "4" :
+				n4.setVisible(true);
+				break;
+			case "5" :
+				n5.setVisible(true);
+				break;
+			case "6" :
+				n6.setVisible(true);
+				break;
+			case "7" :
+				n7.setVisible(true);
+				break;
+			case "8" :
+				n8.setVisible(true);
+				break;
+			case "9" :
+				n9.setVisible(true);
+				break;
+			default :
+				break;
 		};
 	}
+	
+public void increase(String number) {
+		
+		switch (number.charAt(number.length()-digitIndexPos)) {
+			case '0' :
+				n0.setVisible(false);
+				n1.setVisible(true);
+				break;
+			case '1' :
+				n1.setVisible(false);
+				n2.setVisible(true);
+
+				break;
+			case '2' :
+				n2.setVisible(false);
+				n3.setVisible(true);
+
+				break;
+			case '3' : 
+				n3.setVisible(false);
+				n4.setVisible(true);
+
+				break;
+			case '4' :
+				n4.setVisible(false);
+				n5.setVisible(true);
+
+				break;
+			case '5' :
+				n5.setVisible(false);
+				n6.setVisible(true);
+
+				break;
+			case '6' :
+				n6.setVisible(false);
+				n7.setVisible(true);
+
+				break;
+			case '7' :
+				n7.setVisible(false);
+				n8.setVisible(true);
+
+				break;
+			case '8' :
+				n8.setVisible(false);
+				n9.setVisible(true);
+
+				break;
+			case '9' :
+				n9.setVisible(false);
+				n0.setVisible(true);
+
+				break;
+			default :
+				break;
+		};
+	}
+	
+	public void decrease(String number) {
+		
+		switch (number) {
+		case "0" :
+			break;
+		case "1" :
+			n1.setVisible(false);
+			n0.setVisible(true);
+
+			break;
+		case "2" :
+			n2.setVisible(false);
+			n1.setVisible(true);
+
+			break;
+		case "3" : 
+			n3.setVisible(false);
+			n2.setVisible(true);
+
+			break;
+		case "4" :
+			n4.setVisible(false);
+			n3.setVisible(true);
+
+			break;
+		case "5" :
+			n5.setVisible(false);
+			n4.setVisible(true);
+
+			break;
+		case "6" :
+			n6.setVisible(false);
+			n5.setVisible(true);
+
+			break;
+		case "7" :
+			n7.setVisible(false);
+			n6.setVisible(true);
+
+			break;
+		case "8" :
+			n8.setVisible(false);
+			n7.setVisible(true);
+
+			break;
+		case "9" :
+			n9.setVisible(false);
+			n8.setVisible(true);
+
+			break;
+		default :
+			break;
+	};
+	}
+	
 }

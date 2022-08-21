@@ -6,8 +6,8 @@ import Gui.Numbers;
 public class Statistics {
 	private int points = 0;
 	private int lifes = 3;
-	private Numbers pointsCounter = Frame.getPointsCounter();
-	private Numbers lifesCounter = Frame.getLifesCounter();
+	private Numbers pointsUnits = Frame.getPointsCounter();
+	private Numbers lifesUnits = Frame.getLifesCounter();
 
 	
 	public int getLifes() {
@@ -23,9 +23,7 @@ public class Statistics {
 	}
 	
 	public void decreaseLifes() {
-		lifesCounter.getNumber((char) lifes).setVisible(false);
+		lifesUnits.decrease("" + lifes);
 		lifes -= 1;
-		lifesCounter.getNumber((char) lifes).setVisible(true);
-
 	}
 }

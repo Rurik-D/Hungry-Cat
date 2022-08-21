@@ -36,8 +36,12 @@ public class Frame extends JFrame implements KeyListener{
 	private JLabel lifes;
 	private Statistics stats = new Statistics();
 	private List<Dog> dogList = new ArrayList<>();
-	private static Numbers pointsCounter = new Numbers(mainPanel, "points");
-	private static Numbers lifesCounter = new Numbers(mainPanel, "lifes");
+	private static Numbers pointsUnits = new Numbers(mainPanel, "points", 0);
+	private static Numbers pointsTens = new Numbers(mainPanel, "points", 1);
+
+	private static Numbers lifesUnits = new Numbers(mainPanel, "lifes", 0);
+	private static Numbers lifesTens = new Numbers(mainPanel, "lifes", 1);
+
 
 	
 	public Frame() {
@@ -96,7 +100,9 @@ public class Frame extends JFrame implements KeyListener{
 		mainPanel.add(points);
 		
 		
-		pointsCounter.getNumber("00").setVisible(true);
+		pointsUnits.getNumber("0");
+		pointsTens.getNumber("0");
+
 		
 		
 		lifes.setBounds(325, 10, 153, 60);
@@ -104,7 +110,9 @@ public class Frame extends JFrame implements KeyListener{
 		mainPanel.add(lifes);
 		//lifesCounter = new Numbers(mainPanel, "lifes");
 		
-		lifesCounter.getNumber("03").setVisible(true);
+		lifesUnits.getNumber("3");
+		lifesTens.getNumber("0");
+
 		
 		dogList.add(new Dog());
 		dogList.get(0).dogSpawn(area, cat, mouse, dogList);
@@ -151,7 +159,14 @@ public class Frame extends JFrame implements KeyListener{
 		Movement.updatePosition(area, cat, e.getKeyCode());
 		Movement.updateDogPosition(cat, dogList);
 		if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
+			pointsUnits.increase(String.valueOf(stats.getPoints()));
+			if ((stats.getPoints()+1) % 10 == 0) {
+				pointsTens.increase("0" + String.valueOf(stats.getPoints()));
+			}
 			stats.increasePoints();
+			
+			
+
 			if (Math.pow(2, dogList.size()) == stats.getPoints()) {
 				dogList.add(new Dog());
 				dogList.get(dogList.size() - 1).dogSpawn(area, cat, mouse, dogList);
@@ -174,11 +189,11 @@ public class Frame extends JFrame implements KeyListener{
 	}
 	
 	public static Numbers getPointsCounter() {
-		return pointsCounter;
+		return pointsUnits;
 	}
 	
 	public static Numbers getLifesCounter() {
-		return lifesCounter;
+		return lifesUnits;
 	}
 
 }
