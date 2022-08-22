@@ -1,4 +1,4 @@
-package GameLogic;
+package gameLogic;
 
 import java.awt.Point;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Animals.Dog;
-import Gui.Frame;
+import animals.Dog;
+import gui.Frame;
 
 public class Movement {
 	

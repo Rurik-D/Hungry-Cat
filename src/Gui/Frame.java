@@ -1,4 +1,4 @@
-package Gui;
+package gui;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -18,8 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Animals.*;
-import GameLogic.*;
+import animals.*;
+import gameLogic.*;
 
 public class Frame extends JFrame implements KeyListener{
 	private Rectangle areaRect = new Rectangle(43, 80, 500, 500);

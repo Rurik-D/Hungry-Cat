@@ -1,6 +1,6 @@
-package GameLogic;
+package gameLogic;
 
-import Gui.Frame;
+import gui.Frame;
 
 public class Main {
 	public static void main(String[] args) {

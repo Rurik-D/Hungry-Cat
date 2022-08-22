@@ -1,11 +1,10 @@
-package GameLogic;
+package gameLogic;
 
 import java.util.List;
 import javax.swing.JLabel;
 
-import Animals.Cat;
-import Animals.Dog;
-import Gui.Frame;
+import animals.*;
+import gui.Frame;
 
 public class Collision {
 	private static Statistics stats = new Statistics();

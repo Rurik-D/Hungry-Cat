@@ -1,4 +1,4 @@
-package Animals;
+package animals;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Gui.Frame;
+import gui.Frame;
 
 public class Cat extends JLabel{
 	private JLabel cat;

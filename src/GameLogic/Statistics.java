@@ -1,7 +1,6 @@
-package GameLogic;
+package gameLogic;
 
-import Gui.Frame;
-import Gui.Numbers;
+import gui.*;
 
 public class Statistics {
 	private int points = 0;
