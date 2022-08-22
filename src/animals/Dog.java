@@ -34,15 +34,6 @@ public class Dog extends JLabel{
 		dog.setBounds(Frame.getBoxRect());
 		dog.setOpaque(false);
 		dog.setVisible(true);
-
-	}
-
-	public JLabel getDogLable() {
-		return dog;
-	}
-	
-	public int getIdentifier() {
-		return identifier;
 	}
 	
 	public void dogSpawn(JPanel area, JLabel cat, JLabel mouse, List<Dog> dogList) {
@@ -101,5 +92,12 @@ public class Dog extends JLabel{
 		return dog.getWidth();
 	}
 	
+	public JLabel getDogLable() {
+		return dog;
+	}
+	
+	public int getIdentifier() {
+		return identifier;
+	}
 }
 
