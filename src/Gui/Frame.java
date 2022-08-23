@@ -78,7 +78,8 @@ public class Frame extends JFrame implements KeyListener{
 		}
 		
 		this.setLayout(null);
-		this.setTitle("GameProject");
+		this.setTitle("Hungry Cat!");
+		this.setName("Hungry Cat!");
 		this.setBounds(400, 150, 600, 650);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
