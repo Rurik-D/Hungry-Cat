@@ -38,10 +38,8 @@ public class Frame extends JFrame implements KeyListener{
 	private List<Dog> dogList = new ArrayList<>();
 	private static Numbers pointsUnits = new Numbers(mainPanel, "points", 0);
 	private static Numbers pointsTens = new Numbers(mainPanel, "points", 1);
-
 	private static Numbers lifesUnits = new Numbers(mainPanel, "lifes", 0);
 	private static Numbers lifesTens = new Numbers(mainPanel, "lifes", 1);
-
 
 	
 	public Frame() {
@@ -87,8 +85,8 @@ public class Frame extends JFrame implements KeyListener{
 		this.setVisible(true);
 		this.getContentPane().setBackground(Color.GRAY.darker().darker());
 		this.getContentPane().setVisible(true);
-
 		this.getContentPane().add(mainPanel);
+		
 		mainPanel.setLayout(null);
 		mainPanel.setBounds(0, 0, 600, 650);
 		mainPanel.add(area);
@@ -100,11 +98,8 @@ public class Frame extends JFrame implements KeyListener{
 		points.setVisible(true);
 		mainPanel.add(points);
 		
-		
 		pointsUnits.getNumber("0");
 		pointsTens.getNumber("0");
-
-		
 		
 		lifes.setBounds(325, 10, 153, 60);
 		lifes.setVisible(true);
@@ -139,6 +134,8 @@ public class Frame extends JFrame implements KeyListener{
 		grid.setVisible(true);
 		area.add(grid);
 		
+		Sounds.backgroundSong();
+		
 	}
 	
 	public JFrame getFrame() {
@@ -160,13 +157,12 @@ public class Frame extends JFrame implements KeyListener{
 		Movement.updatePosition(area, cat, e.getKeyCode());
 		Movement.updateDogPosition(cat, dogList);
 		if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
+			Sounds.mouseCatched();
 			pointsUnits.increase(String.valueOf(stats.getPoints()));
 			if ((stats.getPoints()+1) % 10 == 0) {
 				pointsTens.increase("0" + String.valueOf(stats.getPoints()));
 			}
 			stats.increasePoints();
-			
-			
 
 			if (Math.pow(2, dogList.size()) == stats.getPoints()) {
 				dogList.add(new Dog());
@@ -174,7 +170,6 @@ public class Frame extends JFrame implements KeyListener{
 				area.remove(grid);
 				area.add(grid);
 			}
-			System.out.println("Points = " + stats.getPoints());
 			Movement.updateMousePosition(mouse, cat);
 		}
 		Collision.checkDogCollision(cat, dogList);

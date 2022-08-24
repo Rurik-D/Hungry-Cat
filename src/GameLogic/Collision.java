@@ -4,7 +4,7 @@ import java.util.List;
 import javax.swing.JLabel;
 
 import animals.*;
-import gui.Frame;
+import gui.Sounds;
 
 public class Collision {
 	private static Statistics stats = new Statistics();
@@ -26,8 +26,8 @@ public class Collision {
 		for (Dog dog : dogList) {
 			if (cat.getLocation().equals(dog.getDogLable().getLocation())) {
 				stats.decreaseLifes();
-				System.out.println("Lifes = " + stats.getLifes());
 				cat.catRandomPosition();
+				Sounds.catCatched();
 				break;
 			}
 		}
