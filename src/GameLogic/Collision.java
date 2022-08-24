@@ -28,6 +28,7 @@ public class Collision {
 				stats.decreaseLifes();
 				cat.catRandomPosition();
 				Sounds.catCatched();
+				GameOver.checkGameOver();
 				break;
 			}
 		}

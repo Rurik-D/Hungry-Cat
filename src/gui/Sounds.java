@@ -31,6 +31,10 @@ public class Sounds {
 	    gainControl.setValue(20f * (float) Math.log10(volume));
 	}
 	
+	public static void stopBgSong() {
+		menuSong.stop();		
+	}
+	
 	public static Clip getClip(File wavFile) {
 		try {
 		    Clip clip = AudioSystem.getClip();

@@ -30,7 +30,7 @@ public class Frame extends JFrame implements KeyListener{
 	private ImageIcon imageIcon;
 	private Cat cat = new Cat();
 	private JLabel mouse;
-	private JLabel grid;
+	private static JLabel grid;
 	private JLabel pictureFrame;
 	private JLabel points;
 	private JLabel lifes;
@@ -40,6 +40,7 @@ public class Frame extends JFrame implements KeyListener{
 	private static Numbers pointsTens = new Numbers(mainPanel, "points", 1);
 	private static Numbers lifesUnits = new Numbers(mainPanel, "lifes", 0);
 	private static Numbers lifesTens = new Numbers(mainPanel, "lifes", 1);
+	private static boolean run = true;
 
 	
 	public Frame() {
@@ -137,47 +138,45 @@ public class Frame extends JFrame implements KeyListener{
 		Sounds.backgroundSong();
 		
 	}
-	
-	public JFrame getFrame() {
-		return this;
-	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		
-	}
+	public void keyPressed(KeyEvent e) {}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		Movement.updatePosition(area, cat, e.getKeyCode());
-		Movement.updateDogPosition(cat, dogList);
-		if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
-			Sounds.mouseCatched();
-			pointsUnits.increase(String.valueOf(stats.getPoints()));
-			if ((stats.getPoints()+1) % 10 == 0) {
-				pointsTens.increase("0" + String.valueOf(stats.getPoints()));
+		if (run) {
+			Movement.updatePosition(area, cat, e.getKeyCode());
+			Movement.updateDogPosition(cat, dogList);
+			if (cat.getX() == mouse.getX() && cat.getY() == mouse.getY()) {
+				Sounds.mouseCatched();
+				pointsUnits.increase(String.valueOf(stats.getPoints()));
+				if ((stats.getPoints()+1) % 10 == 0) {
+					pointsTens.increase("0" + String.valueOf(stats.getPoints()));
+				}
+				stats.increasePoints();
+	
+				if (Math.pow(2, dogList.size()) == stats.getPoints()) {
+					dogList.add(new Dog());
+					dogList.get(dogList.size() - 1).dogSpawn(area, cat, mouse, dogList);
+					area.remove(grid);
+					area.add(grid);
+				}
+				Movement.updateMousePosition(mouse, cat);
 			}
-			stats.increasePoints();
-
-			if (Math.pow(2, dogList.size()) == stats.getPoints()) {
-				dogList.add(new Dog());
-				dogList.get(dogList.size() - 1).dogSpawn(area, cat, mouse, dogList);
-				area.remove(grid);
-				area.add(grid);
-			}
-			Movement.updateMousePosition(mouse, cat);
+			Collision.checkDogCollision(cat, dogList);
+			
 		}
-		Collision.checkDogCollision(cat, dogList);
-		
 	}
 	
 	public static JPanel getArea() {
 		return area;
+	}
+	
+	public static JPanel getMainPanel() {
+		return mainPanel;
 	}
 
 	public static Rectangle getBoxRect() {
@@ -190,6 +189,22 @@ public class Frame extends JFrame implements KeyListener{
 	
 	public static Numbers getLifesCounter() {
 		return lifesUnits;
+	}
+	
+	public static void stopRun() {
+		run = false;
+	}
+
+	public static void refresh() {
+		mainPanel.remove(area);
+		area.remove(grid);
+		mainPanel.add(area);
+		area.add(grid);
+
+		
+
+
+		
 	}
 
 }

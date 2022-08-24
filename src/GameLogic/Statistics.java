@@ -3,8 +3,8 @@ package gameLogic;
 import gui.*;
 
 public class Statistics {
-	private int points = 0;
-	private int lifes = 3;
+	private static int points = 0;
+	private static int lifes = 3;
 	private Numbers pointsUnits = Frame.getPointsCounter();
 	private Numbers lifesUnits = Frame.getLifesCounter();
 
@@ -18,7 +18,7 @@ public class Statistics {
 	}
 	
 	public void increasePoints() {
-		points += 1;
+		this.points += 1;
 	}
 	
 	public void decreaseLifes() {
