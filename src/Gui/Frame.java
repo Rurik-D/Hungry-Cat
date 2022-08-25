@@ -105,12 +105,12 @@ public class Frame extends JFrame implements KeyListener{
 		lifes.setBounds(325, 10, 153, 60);
 		lifes.setVisible(true);
 		mainPanel.add(lifes);
-		//lifesCounter = new Numbers(mainPanel, "lifes");
 		
 		lifesUnits.getNumber("3");
 		lifesTens.getNumber("0");
-
 		
+		area.add(GameOver.getGameOverLbl()); 
+
 		dogList.add(new Dog());
 		dogList.get(0).dogSpawn(area, cat, mouse, dogList);
 		
@@ -124,16 +124,20 @@ public class Frame extends JFrame implements KeyListener{
 		area.setOpaque(true);
 		area.setBackground(Color.WHITE.darker());
 		area.setVisible(true);
-		
+
+
 		mouse.setBounds(boxRect);
 		Movement.updateMousePosition(mouse, cat);
 		mouse.setVisible(true);
 		mouse.setLocation(random.nextInt(0, 10) * 50, random.nextInt(0, 10) * 50);
 		area.add(mouse);
-		
+				
 		grid.setBounds(0, 0, 500, 500);
 		grid.setVisible(true);
 		area.add(grid);
+		
+
+
 		
 		Sounds.backgroundSong();
 		
@@ -196,15 +200,7 @@ public class Frame extends JFrame implements KeyListener{
 	}
 
 	public static void refresh() {
-		mainPanel.remove(area);
-		area.remove(grid);
-		mainPanel.add(area);
-		area.add(grid);
-
-		
-
-
-		
+		GameOver.getGameOverLbl().setVisible(true);
 	}
 
 }
